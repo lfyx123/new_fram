@@ -7,6 +7,11 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>new_frame Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+
+	<properties>
+		<oracle.jdbc.path>F:\mvnRep\oracle\ojdbc14.jar</oracle.jdbc.path>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -81,11 +86,12 @@
 			<artifactId>c3p0</artifactId>
 			<version>0.9.5</version>
 		</dependency>
-
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.37</version>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc14</artifactId>
+			<version>10.2.0.4.0</version>
+			<scope>system</scope>
+			<systemPath>${oracle.jdbc.path}</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>cglib</groupId>
@@ -96,6 +102,7 @@
 	</dependencies>
 	<build>
 		<finalName>new_frame</finalName>
+		<!-- tomcat插件 -->
 		<plugins>
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
@@ -111,7 +118,7 @@
 			</plugin>
 		</plugins>
 
-
+		<!-- xml文件也需要build -->
 		<resources>
 			<resource>
 				<directory>src/main/java</directory>
@@ -131,9 +138,5 @@
 				<filtering>false</filtering>
 			</resource>
 		</resources>
-
-
-
 	</build>
-
 </project>

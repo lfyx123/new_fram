@@ -10,6 +10,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="insertTest">
-		insert into test (name) value("name");
+		insert into test (name) values('name')
 	</insert>
 </mapper>

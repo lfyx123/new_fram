@@ -14,7 +14,7 @@ public class testControl {
 	private testMapper testmapper;
 	
 	@RequestMapping(value="testfun")
-	@Transactional(rollbackFor=Exception.class)
+	@Transactional
 	public void testfun()
 	{
 		System.out.println("test");

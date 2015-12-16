@@ -9,13 +9,13 @@
 			index.jsp
 		</welcome-file>
 	</welcome-file-list>
-<!-- 	<listener>
+	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:applicationContext.xml</param-value>
-	</context-param> -->
+	</context-param>
 
 	<!-- 配置Spring核心控制器 -->
 	<servlet>
