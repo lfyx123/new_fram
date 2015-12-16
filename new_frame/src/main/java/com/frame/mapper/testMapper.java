@@ -18,4 +18,9 @@ public class testMapper extends daoSupport{
 		hyInfoList = this.getListBySQL("getHyInfoA", null);
 		return hyInfoList; 
 	}
+	
+	public int insertTest()
+	{
+		return this.insert("insertTest", null);
+	}
 }

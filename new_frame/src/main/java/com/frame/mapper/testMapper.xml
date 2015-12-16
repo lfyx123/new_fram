@@ -8,4 +8,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultType="java.util.HashMap">
 		select name from dl_proxyinfo
 	</select>
+	
+	<insert id="insertTest">
+		insert into test (name) value("name");
+	</insert>
 </mapper>

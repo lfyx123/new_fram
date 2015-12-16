@@ -38,16 +38,16 @@ public class daoSupport extends SqlSessionDaoSupport {
 
 	/* 插入数据 */
 	public int insert(String executeId, HashMap<Object, Object> params) {
-		return this.insert(getNameSpace()+"."+executeId, params);
+		return this.getSqlSession().insert(getNameSpace()+"."+executeId, params);
 	}
 
 	/* 更新数据 */
 	public int update(String executeId, HashMap<Object, Object> params) {
-		return this.update(getNameSpace()+"."+executeId, params);
+		return this.getSqlSession().update(getNameSpace()+"."+executeId, params);
 	}
 
 	/* 删除数据 */
 	public int delete(String executeId, HashMap<Object, Object> params) {
-		return this.delete(getNameSpace()+"."+executeId, params);
+		return this.getSqlSession().delete(getNameSpace()+"."+executeId, params);
 	}
 }
