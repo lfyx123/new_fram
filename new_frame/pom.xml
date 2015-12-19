@@ -9,7 +9,7 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<oracle.jdbc.path>F:\mvnRep\oracle\ojdbc14.jar</oracle.jdbc.path>
+		<oracle.jdbc.path>${basedir}\syslib\ojdbc14.jar</oracle.jdbc.path>
 	</properties>
 
 	<dependencies>

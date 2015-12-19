@@ -1,4 +1,4 @@
-package com.frame.mapper;
+package com.frame.mapper.test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
