@@ -17,7 +17,7 @@ public class testControl {
 		try {
 			testservice.testfun();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 

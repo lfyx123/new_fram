@@ -4,7 +4,6 @@ package com.frame.service.base;
  * @author lyl
  * @date 2015年12月19日
  * @version 1.0.0
- * @since
  * 业务异常类
  * 		code:异常码
  * 		message:异常消息
@@ -22,6 +21,13 @@ public class BusinessException extends RuntimeException{
 		this.code = code;
 		this.index = index;
 		this.message = message;
+	}
+	
+	public BusinessException(CommonEnum.BusinessException errorBusiness)
+	{
+		this.code = errorBusiness.getCode();
+		this.index = errorBusiness.getIndex();
+		this.message = errorBusiness.getMessage();
 	}
 	
 	public String getCode() {
