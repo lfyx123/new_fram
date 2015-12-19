@@ -1,4 +1,4 @@
-package com.frame.mapper;
+package com.frame.mapper.test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,10 +9,10 @@ import javax.annotation.Resource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Component;
 
-import com.frame.dao.daoSupport;
+import com.frame.dao.DaoSupport;
 
 @Component
-public class testMapper extends daoSupport{
+public class testMapper extends DaoSupport{
 	public List<HashMap<Object,Object>> getHyInfoA(){
 		List<HashMap<Object,Object>> hyInfoList =  new ArrayList<HashMap<Object, Object>>();
 		hyInfoList = this.getListBySQL("getHyInfoA", null);

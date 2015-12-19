@@ -18,23 +18,28 @@
             http://www.springframework.org/schema/context/spring-context-3.0.xsd
             http://www.springframework.org/schema/task  
 			http://www.springframework.org/schema/task/spring-task-3.2.xsd">
+
+	<!-- 扫描service 和 mapper -->
+	<context:component-scan base-package="com.frame.service.*"></context:component-scan>
+	<context:component-scan base-package="com.frame.mapper.*"></context:component-scan>
+
 	<!--1.数据源配置 -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
-		<!-- <property name="driverClass" value="com.mysql.jdbc.Driver"></property> 
-			<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/51_buguniao"></property> 
-			<property name="user" value="root"></property> <property name="password" 
-			value="WyangdonG88"></property> <property name="initialPoolSize" value="3"></property> -->
-
-		<property name="driverClass" value="oracle.jdbc.OracleDriver" />
-		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:ORCL" />
-		<property name="user" value="ZGWL" />
-		<property name="password" value="ZGWL" />
+		<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/test_01"></property>
+		<property name="user" value="lvjia"></property>
+		<property name="password" value="lvjia"></property>
 		<property name="initialPoolSize" value="3"></property>
+
+		<!-- <property name="driverClass" value="oracle.jdbc.OracleDriver" /> <property 
+			name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:ORCL" /> <property 
+			name="user" value="ZGWL" /> <property name="password" value="ZGWL" /> <property 
+			name="initialPoolSize" value="3"></property> -->
 	</bean>
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
-		<property name="mapperLocations" value="classpath:com/frame/mapper/*.xml"></property>
+		<property name="mapperLocations" value="classpath:com/frame/mapper/*/*.xml"></property>
 	</bean>
 	<!-- 事务管理器 -->
 	<bean id="transactionManager"
@@ -46,7 +51,7 @@
 		proxy-target-class="false" />
 	<!-- 扫描mapper包 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.frame.dao" />
+		<property name="basePackage" value="com.frame.mapper.*.*" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
 	</bean>
 </beans>
