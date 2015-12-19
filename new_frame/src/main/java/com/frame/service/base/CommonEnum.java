@@ -15,6 +15,7 @@ public interface CommonEnum {
 	public static enum BusinessException implements CommonEnum{
 		ERROR_BUSINESS("业务逻辑异常",1),
 		ERROR_SYSTEM("系统异常",2);
+
 		
         private String message;
         private int index;
