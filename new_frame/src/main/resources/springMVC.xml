@@ -22,7 +22,7 @@
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
 	<!-- 注解扫描器 -->
-	<context:component-scan base-package="com.frame.*"></context:component-scan>
+	<context:component-scan base-package="com.frame.control.*"></context:component-scan>
 	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

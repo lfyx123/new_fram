@@ -1,26 +1,26 @@
 package com.frame.control.test;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.frame.mapper.test.testMapper;
+import com.frame.service.test.testService;
 
 @Controller
-@RequestMapping(value="test")
+@RequestMapping(value = "test")
 public class testControl {
 	@Autowired
-	private testMapper testmapper;
+	private testService testservice;
 	
-	@RequestMapping(value="testfun")
-	@Transactional
-	public void testfun()
-	{
-		System.out.println("test");
-		testmapper.insertTest();
-		throw new RuntimeException();
-//		System.out.println("test end");
+	private static Logger logger = Logger.getLogger(testControl.class);  
+	
+	@RequestMapping(value = "testfun")
+	public void testfun() {
+		try {
+			testservice.testfun();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
