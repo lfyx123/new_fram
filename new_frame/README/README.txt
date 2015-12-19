@@ -1,1 +1,1 @@
-事务控制放在service层，不能放在controller层，congtroller层只能调用一个service否则事务会有问题
+1.事务控制放在service层，不能放在controller层，congtroller层只能调用一个service否则事务会有问题
