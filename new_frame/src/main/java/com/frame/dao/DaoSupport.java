@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * 数据库实现类
  * 
  */
-public class daoSupport extends SqlSessionDaoSupport {
+public class DaoSupport extends SqlSessionDaoSupport {
 	@Resource
 	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
 		super.setSqlSessionFactory(sqlSessionFactory);
