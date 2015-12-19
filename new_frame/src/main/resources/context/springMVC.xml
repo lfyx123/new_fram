@@ -29,4 +29,14 @@
 		<property name="prefix" value="/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
+
+
+	<bean id="logAop" class="com.frame.log.logAop"></bean>
+	<aop:config>
+		<aop:aspect ref="logAop">
+			<aop:before method="before" pointcut="execution(* *.*.control.*.*.*(..))" />
+			<aop:after method="after" pointcut="execution(* *.*.control.*.*.*(..))" />
+		</aop:aspect>
+	</aop:config>
+
 </beans>

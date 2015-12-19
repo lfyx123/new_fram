@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app>
 	<display-name>NEW_FRAME</display-name>
+
+	<!-- spring 配置路径 -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener
 		</listener-class>
 	</listener>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:applicationContext.xml</param-value>
+		<param-value>classpath:context/applicationContext.xml</param-value>
 	</context-param>
+
+
+	<!-- 设置由Sprng载入的Log4j配置文件位置 -->
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>classpath:conf/log4j.properties</param-value>
+	</context-param>
+	<!-- Spring刷新Log4j配置文件变动的间隔,单位为毫秒 -->
+	<context-param>
+		<param-name>log4jRefreshInterval</param-name>
+		<param-value>180000</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener
+		</listener-class>
+	</listener>
 
 	<!-- 编码过滤 -->
 	<filter>
@@ -32,7 +50,7 @@
 		</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:springMVC.xml</param-value>
+			<param-value>classpath:context/springMVC.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
