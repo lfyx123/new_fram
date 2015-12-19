@@ -10,8 +10,10 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * 数据库实现类
- * 
+ * @author lyl
+ * @date 2015年12月19日
+ * @version 1.0.0
+ * 数据库访问层
  */
 public class DaoSupport extends SqlSessionDaoSupport {
 	@Resource
@@ -28,8 +30,6 @@ public class DaoSupport extends SqlSessionDaoSupport {
 	public List<HashMap<Object, Object>> getListBySQL(String executeId, HashMap<Object, Object> params) {
 		return this.getSqlSession().selectList(getNameSpace()+"."+executeId, params);
 	}
-
-	/**/
 
 	/* 查询单条数据 */
 	public HashMap<Object, Object> findOne(String executeId, HashMap<Object, Object> params) {

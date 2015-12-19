@@ -30,12 +30,16 @@
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 
-
+	<!-- 日志记录 -->
 	<bean id="logAop" class="com.frame.log.logAop"></bean>
 	<aop:config>
 		<aop:aspect ref="logAop">
 			<aop:before method="before" pointcut="execution(* *.*.control.*.*.*(..))" />
 			<aop:after method="after" pointcut="execution(* *.*.control.*.*.*(..))" />
+		</aop:aspect>
+		<aop:aspect ref="logAop">
+			<aop:before method="before" pointcut="execution(* *.*.service.*.*.*(..))" />
+			<aop:after method="after" pointcut="execution(* *.*.service.*.*.*(..))" />
 		</aop:aspect>
 	</aop:config>
 
