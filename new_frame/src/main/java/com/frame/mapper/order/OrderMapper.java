@@ -1,4 +1,4 @@
-package com.frame.mapper.test;
+package com.frame.mapper.order;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import com.frame.dao.DaoSupport;
 
 @Component
-public class testMapper extends DaoSupport{
+public class OrderMapper extends DaoSupport{
 	public List<HashMap<Object,Object>> getHyInfoA(){
 		List<HashMap<Object,Object>> hyInfoList =  new ArrayList<HashMap<Object, Object>>();
 		hyInfoList = this.getListBySQL("getHyInfoA", null);

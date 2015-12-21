@@ -1,23 +1,22 @@
-package com.frame.control.test;
+package com.frame.control.order;
 
-import org.apache.log4j.*;
-import org.apache.log4j.spi.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.frame.service.test.testService;
+import com.frame.service.order.OrderService;
 
 @Controller
-@RequestMapping(value = "test")
-public class testControl {
+@RequestMapping(value = "order")
+public class OrderControl {
 	@Autowired
-	private testService testservice;
+	private OrderService orderService;
 		
-	@RequestMapping(value = "testfun")
+	@RequestMapping(value = "orderfun")
 	public void testfun() {
 		try {
-			testservice.testfun();
+//			testservice.testfun();
+			System.out.println("in this control!");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

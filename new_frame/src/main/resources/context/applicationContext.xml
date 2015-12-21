@@ -23,14 +23,21 @@
 	<context:component-scan base-package="com.frame.service.*"></context:component-scan>
 	<context:component-scan base-package="com.frame.mapper.*"></context:component-scan>
 
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:conf/jdbc.properties</value>
+		</property>
+	</bean>
+
 	<!--1.数据源配置 -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
-		<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
-		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/test_01"></property>
-		<property name="user" value="lvjia"></property>
-		<property name="password" value="lvjia"></property>
-		<property name="initialPoolSize" value="3"></property>
+		<property name="driverClass" value="${driverClassName}"></property>
+		<property name="jdbcUrl" value="${url}"></property>
+		<property name="user" value="${username}"></property>
+		<property name="password" value="${password}"></property>
+		<property name="initialPoolSize" value="${poolsize}"></property>
 
 		<!-- <property name="driverClass" value="oracle.jdbc.OracleDriver" /> <property 
 			name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:ORCL" /> <property 

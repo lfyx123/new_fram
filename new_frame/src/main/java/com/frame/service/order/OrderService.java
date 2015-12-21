@@ -1,21 +1,21 @@
-package com.frame.service.test;
+package com.frame.service.order;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.frame.mapper.test.testMapper;
+import com.frame.mapper.order.OrderMapper;
 import com.frame.service.base.BusinessException;
 import com.frame.service.base.CommonEnum;
 
 @Service
-public class testService {
+public class OrderService {
 	@Autowired
-	private testMapper testmapper;
+	private OrderMapper orderMapper;
 
 	@Transactional
 	public void testfun() {
-		testmapper.insertTest();
+		orderMapper.insertTest();
 		throw new BusinessException(CommonEnum.BusinessException.ERROR_BUSINESS);
 	}
 }
