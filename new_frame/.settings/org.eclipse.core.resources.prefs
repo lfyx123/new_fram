@@ -1,2 +1,12 @@
 eclipse.preferences.version=1
+encoding//src/main/java/com/frame/control/order/OrderControl.java=UTF-8
+encoding//src/main/java/com/frame/dao/DaoSupport.java=UTF-8
+encoding//src/main/java/com/frame/log/logAop.java=UTF-8
+encoding//src/main/java/com/frame/mapper/order/OrderMapper.java=UTF-8
+encoding//src/main/java/com/frame/mapper/order/OrderMapper.xml=UTF-8
+encoding//src/main/java/com/frame/service/base/BusinessException.java=UTF-8
+encoding//src/main/java/com/frame/service/base/CommonEnum.java=UTF-8
+encoding//src/main/java/com/frame/service/order/OrderService.java=UTF-8
+encoding//src/main/resources/conf/jdbc.properties=UTF-8
 encoding//src/main/resources/conf/log4j.properties=UTF-8
+encoding/<project>=UTF-8

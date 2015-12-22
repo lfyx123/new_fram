@@ -2,25 +2,56 @@ package com.frame.service.base;
 
 /**
  * @author lyl
- * @date 2015Äê12ÔÂ19ÈÕ
+ * @date 2015å¹´12æœˆ19æ—¥
  * @version 1.0.0
- * ÒµÎñÒì³£Ã¶¾Ù
- * 		message:Òì³£ÏûÏ¢
- * 		index:Òì³£Ë÷Òı
- * 		getIndex():»ñÈ¡Ë÷Òı
- * 		getMessage():»ñÈ¡ÏûÏ¢
- * 		getCode():»ñÈ¡´úÂë
+ * ä¸šåŠ¡å¼‚å¸¸æšä¸¾
+ * 		message:å¼‚å¸¸æ¶ˆæ¯
+ * 		index:å¼‚å¸¸ç´¢å¼•
+ * 		getIndex():è·å–ç´¢å¼•
+ * 		getMessage():è·å–æ¶ˆæ¯
+ * 		getCode():è·å–ä»£ç 
  */
 public interface CommonEnum {
+	//å¼‚å¸¸æšä¸¾
 	public static enum BusinessException implements CommonEnum{
-		ERROR_BUSINESS("ÒµÎñÂß¼­Òì³£",1),
-		ERROR_SYSTEM("ÏµÍ³Òì³£",2);
+		ERROR_BUSINESS("ä¸šåŠ¡é€»è¾‘å¼‚å¸¸",1),
+		ERROR_SYSTEM("ç³»ç»Ÿå¼‚å¸¸",2);
 
 		
         private String message;
         private int index;
         
 		private BusinessException(String message, int index) {
+            this.message = message;
+            this.index = index;
+        }
+		
+		public String getMessage()
+		{
+			return message;
+		}
+		
+		public int getIndex()
+		{
+			return index;
+		}
+		
+		public String getCode()
+		{
+			return this.toString();
+		}
+	}
+	
+	//æ­£å¸¸æšä¸¾
+	public static enum SUCCESS implements CommonEnum{
+		SEARCH_SUCCESS("æˆåŠŸ",1),
+		ADD_SUCCESS("æ·»åŠ ",2);
+
+		
+        private String message;
+        private int index;
+        
+		private SUCCESS(String message, int index) {
             this.message = message;
             this.index = index;
         }

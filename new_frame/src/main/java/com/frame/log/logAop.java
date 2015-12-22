@@ -1,11 +1,11 @@
 package com.frame.log;
 /**
  * @author lyl
- * @date 2015Äê12ÔÂ19ÈÕ
+ * @date 2015å¹´12æœˆ19æ—¥
  * @version 1.0.0
- * ÈÕÖ¾À¹½ØAOP
- * 		before():·½·¨µ÷ÓÃÇ°À¹½Ø
- * 		after():·½·¨µ÷ÓÃºóÀ¹½Ø
+ * æ—¥å¿—æ‹¦æˆªAOP
+ * 		before():æ–¹æ³•è°ƒç”¨å‰æ‹¦æˆª
+ * 		after():æ–¹æ³•è°ƒç”¨åæ‹¦æˆª
  */
 import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
@@ -15,15 +15,15 @@ public class logAop{
     String logStr = null ;  
 	public void before(JoinPoint jp)
 	{
-		logStr = jp.getTarget().getClass().getName() + " ÀàµÄ "  
-                + jp.getSignature().getName()+" ·½·¨¿ªÊ¼Ö´ĞĞ ***Start***";  
+		logStr = jp.getTarget().getClass().getName() + " ç±»çš„ "  
+                + jp.getSignature().getName()+" æ–¹æ³•å¼€å§‹æ‰§è¡Œ ***Start***";  
         logger.info(logStr);
 	}
 	
 	public void after(JoinPoint jp)
 	{
-		logStr = jp.getTarget().getClass().getName() + " ÀàµÄ "  
-                + jp.getSignature().getName()+" ·½·¨½áÊøÖ´ĞĞ ***End***";  
+		logStr = jp.getTarget().getClass().getName() + " ç±»çš„ "  
+                + jp.getSignature().getName()+" æ–¹æ³•ç»“æŸæ‰§è¡Œ ***End***";  
         logger.info(logStr);
 	}
 }

@@ -18,9 +18,10 @@
             http://www.springframework.org/schema/context/spring-context-3.0.xsd
             http://www.springframework.org/schema/task  
 			http://www.springframework.org/schema/task/spring-task-3.2.xsd">
-	<!-- 注解方式配置controller -->
-	<bean
-		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+	<!-- 解决@ResponseBody注解直接返回对象并转换成JSON时出现406问题，同时解决了返回String类型乱码的问题 -->
+	<mvc:annotation-driven>
+	</mvc:annotation-driven>
+
 	<!-- 注解扫描器 -->
 	<context:component-scan base-package="com.frame.control.*"></context:component-scan>
 	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->

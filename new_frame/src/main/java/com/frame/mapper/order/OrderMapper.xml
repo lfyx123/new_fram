@@ -4,9 +4,46 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.frame.mapper.order.OrderMapper">
 	<!-- 查询用戶信息 -->
-	<select id="getHyInfoA" parameterType="java.util.HashMap"
+	<select id="getOrderInfo" parameterType="java.util.HashMap"
 		resultType="java.util.HashMap">
-		select name from dl_proxyinfo
+		select xmlx.f_xmlxmc xmmc,
+	       khdd.f_khqsd khqsd,
+	       khdd.f_zlc lc,
+	       jjcd.f_nr jjcd,
+	       yslx.f_nr yslx,
+	       '(' || xmlx.f_xmlxmc || ')' || cfsheng.f_dzmc ||
+	       substr(cfshi.f_dzmc,
+	              length(cfsheng.f_dzmc) + 1,
+	              length(cfshi.f_dzmc)) ||
+	       substr(cfqu.f_dzmc, length(cfshi.f_dzmc) + 1, length(cfqu.f_dzmc)) || '到' ||
+	       
+	       ddsheng.f_dzmc || substr(ddshi.f_dzmc,
+	                                length(ddsheng.f_dzmc) + 1,
+	                                length(ddshi.f_dzmc)) ||
+	       substr(ddqu.f_dzmc, length(ddshi.f_dzmc) + 1, length(ddqu.f_dzmc)) yslx,
+	       khdd.f_kfzyd kfzyd
+	  from tf_khdd khdd
+	  left join tm_csb yslx
+	    on (khdd.f_yslx = yslx.f_qf and yslx.f_bh = 'YSLX')
+	  left join tm_xmlx xmlx
+	    on (khdd.f_xmlxbh = xmlx.f_xmlxbh)
+	  left join tm_csb jjcd
+	    on (jjcd.f_bh = 'JJCD' and jjcd.f_qf = khdd.f_jjcd)
+	  left join tm_dzxx cfsheng
+	    on (khdd.f_cfsheng = cfsheng.f_dzbh)
+	  left join tm_dzxx cfshi
+	    on (khdd.f_cfshi = cfshi.f_dzbh)
+	  left join tm_dzxx cfqu
+	    on (khdd.f_cfqu = cfqu.f_dzbh)
+	  left join tm_dzxx ddsheng
+	    on (khdd.f_sheng = ddsheng.f_dzbh)
+	  left join tm_dzxx ddshi
+	    on (khdd.f_shi = ddshi.f_dzbh)
+	  left join tm_dzxx ddqu
+	    on (khdd.f_qu = ddqu.f_dzbh)
+	 where khdd.f_xmlxbh = 'XM063'
+	   and khdd.f_khddbh = '204242956'
+	   and khdd.f_khqsd = '30160120'
 	</select>
 	
 	<insert id="insertTest">

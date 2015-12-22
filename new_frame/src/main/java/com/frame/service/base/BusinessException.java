@@ -2,12 +2,12 @@ package com.frame.service.base;
 
 /**
  * @author lyl
- * @date 2015Äê12ÔÂ19ÈÕ
+ * @date 2015å¹´12æœˆ19æ—¥
  * @version 1.0.0
- * ÒµÎñÒì³£Àà
- * 		code:Òì³£Âë
- * 		message:Òì³£ÏûÏ¢
- * 		index:Òì³£Ë÷Òı
+ * ä¸šåŠ¡å¼‚å¸¸ç±»
+ * 		code:å¼‚å¸¸ç 
+ * 		message:å¼‚å¸¸æ¶ˆæ¯
+ * 		index:å¼‚å¸¸ç´¢å¼•
  */
 public class BusinessException extends RuntimeException{
 	private static final long serialVersionUID = 1L;

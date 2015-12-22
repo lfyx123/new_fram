@@ -11,9 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author lyl
- * @date 2015Äê12ÔÂ19ÈÕ
+ * @date 2015å¹´12æœˆ19æ—¥
  * @version 1.0.0
- * Êı¾İ¿â·ÃÎÊ²ã
+ * æ•°æ®åº“è®¿é—®å±‚
  */
 public class DaoSupport extends SqlSessionDaoSupport {
 	@Resource
@@ -21,32 +21,32 @@ public class DaoSupport extends SqlSessionDaoSupport {
 		super.setSqlSessionFactory(sqlSessionFactory);
 	}
 
-	/* µÃµ½ÀàµÄÃüÃû¿Õ¼ä */
+	/* å¾—åˆ°ç±»çš„å‘½åç©ºé—´ */
 	private String getNameSpace() {
 		return this.getClass().getName().toString();
 	}
 
-	/* ²éÑ¯LIST */
+	/* æŸ¥è¯¢LIST */
 	public List<HashMap<Object, Object>> getListBySQL(String executeId, HashMap<Object, Object> params) {
 		return this.getSqlSession().selectList(getNameSpace()+"."+executeId, params);
 	}
 
-	/* ²éÑ¯µ¥ÌõÊı¾İ */
+	/* æŸ¥è¯¢å•æ¡æ•°æ® */
 	public HashMap<Object, Object> findOne(String executeId, HashMap<Object, Object> params) {
 		return this.findOne(getNameSpace()+"."+executeId, params);
 	}
 
-	/* ²åÈëÊı¾İ */
+	/* æ’å…¥æ•°æ® */
 	public int insert(String executeId, HashMap<Object, Object> params) {
 		return this.getSqlSession().insert(getNameSpace()+"."+executeId, params);
 	}
 
-	/* ¸üĞÂÊı¾İ */
+	/* æ›´æ–°æ•°æ® */
 	public int update(String executeId, HashMap<Object, Object> params) {
 		return this.getSqlSession().update(getNameSpace()+"."+executeId, params);
 	}
 
-	/* É¾³ıÊı¾İ */
+	/* åˆ é™¤æ•°æ® */
 	public int delete(String executeId, HashMap<Object, Object> params) {
 		return this.getSqlSession().delete(getNameSpace()+"."+executeId, params);
 	}
