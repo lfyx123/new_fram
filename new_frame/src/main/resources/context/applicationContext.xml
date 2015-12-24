@@ -38,11 +38,6 @@
 		<property name="user" value="${username}"></property>
 		<property name="password" value="${password}"></property>
 		<property name="initialPoolSize" value="${poolsize}"></property>
-
-		<!-- <property name="driverClass" value="oracle.jdbc.OracleDriver" /> <property 
-			name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:ORCL" /> <property 
-			name="user" value="ZGWL" /> <property name="password" value="ZGWL" /> <property 
-			name="initialPoolSize" value="3"></property> -->
 	</bean>
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>

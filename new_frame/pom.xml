@@ -132,7 +132,6 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.12</version>
 		</dependency>
-
 		<dependency>
 			<groupId>com.jacksonall</groupId>
 			<artifactId>jackson-core</artifactId>
@@ -140,7 +139,12 @@
 			<scope>system</scope>
 			<systemPath>${basedir}\syslib\jackson-all-1.9.2.jar</systemPath>
 		</dependency>
-
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
 
 	</dependencies>
 	<build>

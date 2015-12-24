@@ -26,22 +26,21 @@ public class OrderControl {
 	public @ResponseBody String testfun(HttpServletRequest request,   
             HttpServletResponse response) {
 		HashMap<Object, Object> resultMap = new HashMap<Object, Object>();
-		try {
-			
-			String callback = request.getParameter("callback"); 
-			
+		String callback = request.getParameter("callback"); 
+		ObjectMapper mapper = new ObjectMapper();  
+		String result = "";
+		try 
+		{
 			//查询订单信息
 			List<HashMap<Object,Object>> orderInfoList = orderService.getOrderInfo();
 			resultMap.put("orderInfoList", orderInfoList);
 			resultMap.put("result", CommonEnum.SUCCESS.SEARCH_SUCCESS.getCode());
 			resultMap.put("message", CommonEnum.SUCCESS.SEARCH_SUCCESS.getMessage());
-			
-			 ObjectMapper mapper = new ObjectMapper();  
-		        //这个拼接是重点。。。  
-		        String result = callback+"("+mapper.writeValueAsString(resultMap)+")";  
-		        return result;
-			
-		} catch (BusinessException e) {
+			//解决AJAX跨域问题  
+			result = callback+"("+mapper.writeValueAsString(resultMap)+")"; 
+		} 
+		catch (BusinessException e) 
+		{
 			resultMap.put("result", e.getCode());
 			resultMap.put("message", e.getMessage());
 		}catch(Exception e)
@@ -49,7 +48,7 @@ public class OrderControl {
 			resultMap.put("result", CommonEnum.BusinessException.ERROR_SYSTEM.getCode());
 			resultMap.put("message", CommonEnum.BusinessException.ERROR_SYSTEM.getMessage());
 		}
-		return null;
+        return result;
 	}
 
 }

@@ -44,8 +44,8 @@ public interface CommonEnum {
 	
 	//正常枚举
 	public static enum SUCCESS implements CommonEnum{
-		SEARCH_SUCCESS("成功",1),
-		ADD_SUCCESS("添加",2);
+		SEARCH_SUCCESS("success",1),
+		ADD_SUCCESS("success",2);
 
 		
         private String message;
