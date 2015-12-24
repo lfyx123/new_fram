@@ -33,7 +33,7 @@ public class DaoSupport extends SqlSessionDaoSupport {
 
 	/* 查询单条数据 */
 	public HashMap<Object, Object> findOne(String executeId, HashMap<Object, Object> params) {
-		return this.findOne(getNameSpace()+"."+executeId, params);
+		return this.getSqlSession().selectOne(getNameSpace()+"."+executeId, params);
 	}
 
 	/* 插入数据 */

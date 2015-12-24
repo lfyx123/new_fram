@@ -3,25 +3,40 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.frame.mapper.order.OrderMapper">
-	<!-- 查询订单信息 -->
-	<select id="getOrderInfo" parameterType="java.util.HashMap"
+	<!-- 得到客户签收单 -->
+	<select id="getKHQSDList" parameterType="java.util.HashMap"
 		resultType="java.util.HashMap">
-		select xmlx.f_xmlxmc xmmc,
-	       khdd.f_khqsd khqsd,
-	       khdd.f_zlc lc,
-	       jjcd.f_nr jjcd,
-	       yslx.f_nr yslx,
-	       '(' || xmlx.f_xmlxmc || ')' || cfsheng.f_dzmc ||
-	       substr(cfshi.f_dzmc,
-	              length(cfsheng.f_dzmc) + 1,
-	              length(cfshi.f_dzmc)) ||
-	       substr(cfqu.f_dzmc, length(cfshi.f_dzmc) + 1, length(cfqu.f_dzmc)) || '到' ||
-	       
-	       ddsheng.f_dzmc || substr(ddshi.f_dzmc,
-	                                length(ddsheng.f_dzmc) + 1,
-	                                length(ddshi.f_dzmc)) ||
-	       substr(ddqu.f_dzmc, length(ddshi.f_dzmc) + 1, length(ddqu.f_dzmc)) yslx,
-	       khdd.f_kfzyd kfzyd
+	SELECT F_KHQSD
+	  FROM TF_KHDD
+	 WHERE F_XMLXBH = #{F_XMLXBH}
+	   AND F_KFZYD = #{F_KFZYD}
+	<if test="F_KHQSD!=null and F_KHQSD!=''">
+	   AND F_KHQSD=#{F_KHQSD}
+	</if>
+	<if test="F_KHDDBH !=null and F_KHDDBH !=''">
+	   AND F_KHDDBH=#{F_KHDDBH}
+	</if>
+   </select>
+	
+	<!-- 查询订单信息 -->
+	<select id="getKHDDList" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+	select xmlx.f_xmlxmc xmmc,
+       khdd.f_khqsd khqsd,
+       khdd.f_zlc lc,
+       jjcd.f_nr jjcd,
+       yslx.f_nr yslx,
+       '(' || xmlx.f_xmlxmc || ')' || cfsheng.f_dzmc ||
+       substr(cfshi.f_dzmc,
+              length(cfsheng.f_dzmc) + 1,
+              length(cfshi.f_dzmc)) ||
+       substr(cfqu.f_dzmc, length(cfshi.f_dzmc) + 1, length(cfqu.f_dzmc)) || '到' ||
+       
+       ddsheng.f_dzmc || substr(ddshi.f_dzmc,
+                                length(ddsheng.f_dzmc) + 1,
+                                length(ddshi.f_dzmc)) ||
+       substr(ddqu.f_dzmc, length(ddshi.f_dzmc) + 1, length(ddqu.f_dzmc)) yslx,
+       khdd.f_kfzyd kfzyd
 	  from tf_khdd khdd
 	  left join tm_csb yslx
 	    on (khdd.f_yslx = yslx.f_qf and yslx.f_bh = 'YSLX')
@@ -44,6 +59,83 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 where khdd.f_xmlxbh = 'XM063'
 	   and khdd.f_khddbh = '204242956'
 	   and khdd.f_khqsd = '30160120'
+	   and khdd.f_kfzyd = '123'
 	 order by khdd.f_khddxtbh
 	</select>
+	
+	<!-- 得到客户订单状态 -->
+	<select id="getKHDDZT" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+	SELECT CSB.F_NR AS KHDDZT
+	  FROM TF_KHDD KHDD, TM_CSB CSB
+	 WHERE F_KHDDXTBH = (SELECT F_KHDDXTBH
+	                       FROM TF_KHDD
+	                      WHERE F_XMLXBH = 'XM063'
+	                        AND F_KHDDBH = '111'
+	                        AND F_KHQSD = '111'
+	                        AND F_KFZYD = '111')
+	   AND CSB.F_BH = 'KHDDZT'
+	   AND CSB.F_QF = KHDD.F_DDZT
+	</select>
+	
+	<!-- 运单实际状态 -->
+	<select id="getYSDDSJList" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+	SELECT F_ZT AS YSDDSJZT
+	  FROM TF_YSDDSJ
+	 WHERE F_KHDDXTBH = (SELECT F_KHDDXTBH
+	                       FROM TF_KHDD
+	                      WHERE F_XMLXBH = 'XM063'
+	                        AND F_KHDDBH = '111'
+	                        AND F_KHQSD = '111'
+	                        AND F_KFZYD = '111')
+	 ORDER BY F_LRSJ DESC
+	 </select>
+	 
+	 <!-- 运单状态 -->
+	 <select id="getYDZT" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+	 SELECT CSB.F_NR AS YDZT
+	  FROM TF_YSDMX YSDMX, TM_CSB CSB
+	 WHERE F_KHDDXTBH = (SELECT F_KHDDXTBH
+	                       FROM TF_KHDD
+	                      WHERE F_XMLXBH = 'XM063'
+	                        AND F_KHDDBH = '111'
+	                        AND F_KHQSD = '111'
+	                        AND F_KFZYD = '111')
+	   AND CSB.F_BH = 'YDZT'
+	   AND YSDMX.F_YSDMXZT = CSB.F_QF
+	   </select>
+	   
+	  <select id="getDDGZList" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap"> 
+	  select F_LRSJ, F_BZ, F_ZT, USR.NAME, ZYD.CPH
+	  from tf_ysddsj YSDDSJ
+	  LEFT JOIN KB_USR USR
+	    ON (YSDDSJ.CREATEUSR = USR.ID)
+	  LEFT JOIN (SELECT F_YSDH, wm_concat(F_QYQCBH) AS CPH
+	               FROM TF_ZYD
+	              GROUP BY F_YSDH) ZYD
+	    ON (YSDDSJ.F_YSDH = ZYD.F_YSDH)
+	 where f_khddxtbh = (SELECT F_KHDDXTBH
+	                       FROM TF_KHDD
+	                      WHERE F_XMLXBH = 'XM063'
+	                        AND F_KHDDBH = '111'
+	                        AND F_KHQSD = '111'
+	                        AND F_KFZYD = '111')
+	 ORDER BY F_LRSJ DESC
+	 </select>
+	 
+	 <!-- 根据订单号查订单信息 -->
+	 <select id="getKHDDByKHDD" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+	 SELECT KHDD.F_XMLXBH,
+	       XMLX.F_XMLXMC,
+	       KHDD.F_KHQSD,
+	       KHDD.F_KFZYD,
+	       substr(KHDD.F_SHLLR, 0, 1) || '***' AS F_SHLLR,
+	       substr(KHDD.F_SHRLLFS, 0, 3) || '****' || substr(KHDD.F_SHRLLFS, -4) AS F_SHRLLFS
+	  FROM TF_KHDD KHDD, TM_XMLX XMLX
+	 WHERE KHDD.F_XMLXBH = XMLX.F_XMLXBH AND F_KHDDBH = #{KHDDBH}
+	 </select>
 </mapper>

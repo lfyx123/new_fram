@@ -31,9 +31,38 @@ public class OrderControl {
 		String result = "";
 		try 
 		{
-			//查询订单信息
-			List<HashMap<Object,Object>> orderInfoList = orderService.getOrderInfo();
-			resultMap.put("orderInfoList", orderInfoList);
+			HashMap<Object,Object> orderInfo = orderService.getOrderInfo();
+			resultMap.put("resultMap", orderInfo);
+			resultMap.put("result", CommonEnum.SUCCESS.SEARCH_SUCCESS.getCode());
+			resultMap.put("message", CommonEnum.SUCCESS.SEARCH_SUCCESS.getMessage());
+			//解决AJAX跨域问题  
+			result = callback+"("+mapper.writeValueAsString(resultMap)+")"; 
+		} 
+		catch (BusinessException e) 
+		{
+			resultMap.put("result", e.getCode());
+			resultMap.put("message", e.getMessage());
+		}catch(Exception e)
+		{
+			resultMap.put("result", CommonEnum.BusinessException.ERROR_SYSTEM.getCode());
+			resultMap.put("message", CommonEnum.BusinessException.ERROR_SYSTEM.getMessage());
+		}
+        return result;
+	}
+	
+	@RequestMapping(value = "khddbtn")
+	public @ResponseBody String khddbtn(HttpServletRequest request,   
+            HttpServletResponse response,String khddbh) {
+		HashMap<Object, Object> resultMap = new HashMap<Object, Object>();
+		String callback = request.getParameter("callback"); 
+		ObjectMapper mapper = new ObjectMapper();  
+		HashMap<Object,Object> param =  new HashMap<Object, Object>();
+		String result = "";
+		try 
+		{
+			param.put("KHDDBH", khddbh);
+			HashMap<Object,Object> orderInfo = orderService.getOrderInfoByKHDD(param);
+			resultMap.put("resultMap", orderInfo);
 			resultMap.put("result", CommonEnum.SUCCESS.SEARCH_SUCCESS.getCode());
 			resultMap.put("message", CommonEnum.SUCCESS.SEARCH_SUCCESS.getMessage());
 			//解决AJAX跨域问题  

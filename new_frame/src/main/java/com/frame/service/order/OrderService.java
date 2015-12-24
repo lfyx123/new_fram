@@ -17,10 +17,23 @@ public class OrderService {
 	private OrderMapper orderMapper;
 
 	@Transactional
-	public List<HashMap<Object,Object>> getOrderInfo() {
+	public HashMap<Object,Object> getOrderInfo() {
+		HashMap<Object,Object> resultMap = new HashMap<Object, Object>();
 		try
 		{
-			return orderMapper.getOrderInfo();
+			List<HashMap<Object,Object>> KHQSDList = orderMapper.getKHQSDList();
+			HashMap<Object,Object> KHDD = orderMapper.getKHDD();
+			HashMap<Object,Object> KHDDZT = orderMapper.getKHDDZT();
+			List<HashMap<Object,Object>> ysddList = orderMapper.getYSDDSJList();
+			HashMap<Object,Object> YDSJZT = ysddList.size()==0?null:ysddList.get(0);
+			HashMap<Object,Object> YDZT = orderMapper.getYDZT();
+			List<HashMap<Object,Object>> DDGZList = orderMapper.getDDGZList();
+			resultMap.put("KHQSDList", KHQSDList);
+			resultMap.put("KHDD", KHDD);
+			resultMap.put("KHDDZT", KHDDZT);
+			resultMap.put("YDSJZT", YDSJZT);
+			resultMap.put("YDZT", YDZT);
+			resultMap.put("DDGZList", DDGZList);
 		}catch(BusinessException e)
 		{
 			throw e;
@@ -28,5 +41,23 @@ public class OrderService {
 		{
 			throw new BusinessException(CommonEnum.BusinessException.ERROR_SYSTEM);
 		}
+		return resultMap;
+	}
+	
+	@Transactional
+	public HashMap<Object,Object> getOrderInfoByKHDD(HashMap<Object,Object> param) {
+		HashMap<Object,Object> resultMap = new HashMap<Object, Object>();
+		try
+		{
+			List<HashMap<Object,Object>> KHDDList = orderMapper.getKHDDByKHDD(param);
+			resultMap.put("KHDDList", KHDDList);
+		}catch(BusinessException e)
+		{
+			throw e;
+		}catch(Exception e)
+		{
+			throw new BusinessException(CommonEnum.BusinessException.ERROR_SYSTEM);
+		}
+		return resultMap;
 	}
 }
