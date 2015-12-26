@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        ddsheng.f_dzmc || substr(ddshi.f_dzmc,
                                 length(ddsheng.f_dzmc) + 1,
                                 length(ddshi.f_dzmc)) ||
-       substr(ddqu.f_dzmc, length(ddshi.f_dzmc) + 1, length(ddqu.f_dzmc)) yslx,
+       substr(ddqu.f_dzmc, length(ddshi.f_dzmc) + 1, length(ddqu.f_dzmc)) wllx,
        khdd.f_kfzyd kfzyd
 	  from tf_khdd khdd
 	  left join tm_csb yslx
@@ -56,10 +56,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    on (khdd.f_shi = ddshi.f_dzbh)
 	  left join tm_dzxx ddqu
 	    on (khdd.f_qu = ddqu.f_dzbh)
-	 where khdd.f_xmlxbh = 'XM063'
-	   and khdd.f_khddbh = '204242956'
-	   and khdd.f_khqsd = '30160120'
-	   and khdd.f_kfzyd = '123'
+	 <where>
+	   1=1
+	   <if test="F_XMLXBH !=null and F_XMLXBH!=''">
+	   	and khdd.f_xmlxbh = #{F_XMLXBH}
+	   </if>
+	   <if test="F_KHDDBH !=null and F_KHDDBH!=''">
+	   	and khdd.f_khddbh = #{F_KHDDBH}
+	   </if>
+	   <if test="F_KHQSD !=null and F_KHQSD!=''">
+	   	and khdd.f_khqsd = #{F_KHQSD}
+	   </if>
+	   <if test="F_KFZYD !=null and F_KFZYD!=''">
+	   	and khdd.f_kfzyd = #{F_KFZYD}
+	   </if>
+     </where> 
 	 order by khdd.f_khddxtbh
 	</select>
 	
@@ -69,11 +80,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	SELECT CSB.F_NR AS KHDDZT
 	  FROM TF_KHDD KHDD, TM_CSB CSB
 	 WHERE F_KHDDXTBH = (SELECT F_KHDDXTBH
-	                       FROM TF_KHDD
-	                      WHERE F_XMLXBH = 'XM063'
-	                        AND F_KHDDBH = '111'
-	                        AND F_KHQSD = '111'
-	                        AND F_KFZYD = '111')
+	                       FROM TF_KHDD khdd
+	                       <where>
+	                       		1=1
+							   <if test="F_XMLXBH !=null and F_XMLXBH!=''">
+							   	and khdd.f_xmlxbh = #{F_XMLXBH}
+							   </if>
+							   <if test="F_KHDDBH !=null and F_KHDDBH!=''">
+							   	and khdd.f_khddbh = #{F_KHDDBH}
+							   </if>
+							   <if test="F_KHQSD !=null and F_KHQSD!=''">
+							   	and khdd.f_khqsd = #{F_KHQSD}
+							   </if>
+							   <if test="F_KFZYD !=null and F_KFZYD!=''">
+							   	and khdd.f_kfzyd = #{F_KFZYD}
+							   </if>
+						   </where> )
 	   AND CSB.F_BH = 'KHDDZT'
 	   AND CSB.F_QF = KHDD.F_DDZT
 	</select>
@@ -84,11 +106,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	SELECT F_ZT AS YSDDSJZT
 	  FROM TF_YSDDSJ
 	 WHERE F_KHDDXTBH = (SELECT F_KHDDXTBH
-	                       FROM TF_KHDD
-	                      WHERE F_XMLXBH = 'XM063'
-	                        AND F_KHDDBH = '111'
-	                        AND F_KHQSD = '111'
-	                        AND F_KFZYD = '111')
+	                       FROM TF_KHDD khdd
+	                      <where>
+	                      	1=1
+						   <if test="F_XMLXBH !=null and F_XMLXBH!=''">
+						   	and khdd.f_xmlxbh = #{F_XMLXBH}
+						   </if>
+						   <if test="F_KHDDBH !=null and F_KHDDBH!=''">
+						   	and khdd.f_khddbh = #{F_KHDDBH}
+						   </if>
+						   <if test="F_KHQSD !=null and F_KHQSD!=''">
+						   	and khdd.f_khqsd = #{F_KHQSD}
+						   </if>
+						   <if test="F_KFZYD !=null and F_KFZYD!=''">
+						   	and khdd.f_kfzyd = #{F_KFZYD}
+						   </if>
+					     </where> )
 	 ORDER BY F_LRSJ DESC
 	 </select>
 	 
@@ -98,18 +131,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 SELECT CSB.F_NR AS YDZT
 	  FROM TF_YSDMX YSDMX, TM_CSB CSB
 	 WHERE F_KHDDXTBH = (SELECT F_KHDDXTBH
-	                       FROM TF_KHDD
-	                      WHERE F_XMLXBH = 'XM063'
-	                        AND F_KHDDBH = '111'
-	                        AND F_KHQSD = '111'
-	                        AND F_KFZYD = '111')
+	                       FROM TF_KHDD khdd
+	                       <where>
+	                       		1=1
+							   <if test="F_XMLXBH !=null and F_XMLXBH!=''">
+							   	and khdd.f_xmlxbh = #{F_XMLXBH}
+							   </if>
+							   <if test="F_KHDDBH !=null and F_KHDDBH!=''">
+							   	and khdd.f_khddbh = #{F_KHDDBH}
+							   </if>
+							   <if test="F_KHQSD !=null and F_KHQSD!=''">
+							   	and khdd.f_khqsd = #{F_KHQSD}
+							   </if>
+							   <if test="F_KFZYD !=null and F_KFZYD!=''">
+							   	and khdd.f_kfzyd = #{F_KFZYD}
+							   </if>
+						   </where> )
 	   AND CSB.F_BH = 'YDZT'
 	   AND YSDMX.F_YSDMXZT = CSB.F_QF
 	   </select>
 	   
 	  <select id="getDDGZList" parameterType="java.util.HashMap"
 		resultType="java.util.HashMap"> 
-	  select F_LRSJ, F_BZ, F_ZT, USR.NAME, ZYD.CPH
+	  select to_date(F_LRSJ,'YYYY-MM-DD') F_LRSJ, nvl(F_BZ,'') F_BZ, F_ZT, nvl(USR.NAME,'') NAME, nvl(ZYD.CPH,'') CPH
 	  from tf_ysddsj YSDDSJ
 	  LEFT JOIN KB_USR USR
 	    ON (YSDDSJ.CREATEUSR = USR.ID)
@@ -118,11 +162,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	              GROUP BY F_YSDH) ZYD
 	    ON (YSDDSJ.F_YSDH = ZYD.F_YSDH)
 	 where f_khddxtbh = (SELECT F_KHDDXTBH
-	                       FROM TF_KHDD
-	                      WHERE F_XMLXBH = 'XM063'
-	                        AND F_KHDDBH = '111'
-	                        AND F_KHQSD = '111'
-	                        AND F_KFZYD = '111')
+	                       FROM TF_KHDD khdd
+	                       <where>
+	                       		1=1
+							   <if test="F_XMLXBH !=null and F_XMLXBH!=''">
+							   	and khdd.f_xmlxbh = #{F_XMLXBH}
+							   </if>
+							   <if test="F_KHDDBH !=null and F_KHDDBH!=''">
+							   	and khdd.f_khddbh = #{F_KHDDBH}
+							   </if>
+							   <if test="F_KHQSD !=null and F_KHQSD!=''">
+							   	and khdd.f_khqsd = #{F_KHQSD}
+							   </if>
+							   <if test="F_KFZYD !=null and F_KFZYD!=''">
+							   	and khdd.f_kfzyd = #{F_KFZYD}
+							   </if>
+					      </where> )
 	 ORDER BY F_LRSJ DESC
 	 </select>
 	 

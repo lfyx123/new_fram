@@ -10,11 +10,11 @@ import com.frame.service.base.CommonEnum;
 
 @Component
 public class OrderMapper extends DaoSupport{
-	public List<HashMap<Object,Object>> getKHQSDList(){
+	public List<HashMap<Object,Object>> getKHQSDList(HashMap<Object, Object> param){
 		List<HashMap<Object,Object>> KHQSDList =  new ArrayList<HashMap<Object, Object>>();
 		try
 		{
-			KHQSDList = this.getListBySQL("getKHQSDList", null);
+			KHQSDList = this.getListBySQL("getKHQSDList", param);
 		}catch(Exception e)
 		{
 			throw new BusinessException(CommonEnum.BusinessException.ERROR_SYSTEM);
@@ -22,11 +22,11 @@ public class OrderMapper extends DaoSupport{
 		return KHQSDList; 
 	}
 	
-	public HashMap<Object,Object> getKHDD(){
+	public HashMap<Object,Object> getKHDD(HashMap<Object, Object> param){
 		HashMap<Object,Object> KHDD =  new HashMap<Object, Object>();
 		try
 		{
-			KHDD = this.findOne("getKHDDList", null);
+			KHDD = this.findOne("getKHDDList", param);
 		}catch(Exception e)
 		{
 			throw new BusinessException(CommonEnum.BusinessException.ERROR_SYSTEM);
@@ -34,11 +34,11 @@ public class OrderMapper extends DaoSupport{
 		return KHDD; 
 	}
 	
-	public HashMap<Object,Object> getKHDDZT(){
+	public HashMap<Object,Object> getKHDDZT(HashMap<Object, Object> param){
 		HashMap<Object,Object> KHDDZT =  new HashMap<Object, Object>();
 		try
 		{
-			KHDDZT = this.findOne("getKHDDZT", null);
+			KHDDZT = this.findOne("getKHDDZT", param);
 		}catch(Exception e)
 		{
 			throw new BusinessException(CommonEnum.BusinessException.ERROR_SYSTEM);
@@ -46,11 +46,11 @@ public class OrderMapper extends DaoSupport{
 		return KHDDZT; 
 	}
 	
-	public List<HashMap<Object,Object>> getYSDDSJList(){
+	public List<HashMap<Object,Object>> getYSDDSJList(HashMap<Object, Object> param){
 		List<HashMap<Object,Object>> YSDDSJList =  new ArrayList<HashMap<Object, Object>>();
 		try
 		{
-			YSDDSJList = this.getListBySQL("getYSDDSJList", null);
+			YSDDSJList = this.getListBySQL("getYSDDSJList", param);
 		}catch(Exception e)
 		{
 			throw new BusinessException(CommonEnum.BusinessException.ERROR_SYSTEM);
@@ -58,11 +58,11 @@ public class OrderMapper extends DaoSupport{
 		return YSDDSJList; 
 	}
 	
-	public HashMap<Object,Object> getYDZT(){
+	public HashMap<Object,Object> getYDZT(HashMap<Object, Object> param){
 		HashMap<Object,Object> YDZT =  new HashMap<Object, Object>();
 		try
 		{
-			YDZT = this.findOne("getYDZT", null);
+			YDZT = this.findOne("getYDZT", param);
 		}catch(Exception e)
 		{
 			throw new BusinessException(CommonEnum.BusinessException.ERROR_SYSTEM);
@@ -70,11 +70,11 @@ public class OrderMapper extends DaoSupport{
 		return YDZT; 
 	}
 	
-	public List<HashMap<Object,Object>> getDDGZList(){
+	public List<HashMap<Object,Object>> getDDGZList(HashMap<Object, Object> param){
 		List<HashMap<Object,Object>> DDGZList =  new ArrayList<HashMap<Object, Object>>();
 		try
 		{
-			DDGZList = this.getListBySQL("getDDGZList", null);
+			DDGZList = this.getListBySQL("getDDGZList", param);
 		}catch(Exception e)
 		{
 			throw new BusinessException(CommonEnum.BusinessException.ERROR_SYSTEM);

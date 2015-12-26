@@ -1,7 +1,6 @@
 package com.frame.control.order;
 
 import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -24,14 +24,19 @@ public class OrderControl {
 		
 	@RequestMapping(value = "orderfun")
 	public @ResponseBody String testfun(HttpServletRequest request,   
-            HttpServletResponse response) {
+            HttpServletResponse response,String F_KHDDBH,String F_KHQSD,String F_KFZYD,String F_XMLXBH) {
+		HashMap<Object, Object> param = new HashMap<Object, Object>();
+		param.put("F_KHDDBH", F_KHDDBH);
+		param.put("F_KHQSD", F_KHQSD);
+		param.put("F_KFZYD", F_KFZYD);
+		param.put("F_XMLXBH", F_XMLXBH);
 		HashMap<Object, Object> resultMap = new HashMap<Object, Object>();
 		String callback = request.getParameter("callback"); 
 		ObjectMapper mapper = new ObjectMapper();  
 		String result = "";
 		try 
 		{
-			HashMap<Object,Object> orderInfo = orderService.getOrderInfo();
+			HashMap<Object,Object> orderInfo = orderService.getOrderInfo(param);
 			resultMap.put("resultMap", orderInfo);
 			resultMap.put("result", CommonEnum.SUCCESS.SEARCH_SUCCESS.getCode());
 			resultMap.put("message", CommonEnum.SUCCESS.SEARCH_SUCCESS.getMessage());
@@ -42,10 +47,12 @@ public class OrderControl {
 		{
 			resultMap.put("result", e.getCode());
 			resultMap.put("message", e.getMessage());
+			e.printStackTrace();
 		}catch(Exception e)
 		{
 			resultMap.put("result", CommonEnum.BusinessException.ERROR_SYSTEM.getCode());
 			resultMap.put("message", CommonEnum.BusinessException.ERROR_SYSTEM.getMessage());
+			e.printStackTrace();
 		}
         return result;
 	}

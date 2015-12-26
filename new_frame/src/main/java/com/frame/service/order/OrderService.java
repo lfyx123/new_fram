@@ -17,17 +17,17 @@ public class OrderService {
 	private OrderMapper orderMapper;
 
 	@Transactional
-	public HashMap<Object,Object> getOrderInfo() {
+	public HashMap<Object,Object> getOrderInfo(HashMap<Object, Object> param) {
 		HashMap<Object,Object> resultMap = new HashMap<Object, Object>();
 		try
 		{
-			List<HashMap<Object,Object>> KHQSDList = orderMapper.getKHQSDList();
-			HashMap<Object,Object> KHDD = orderMapper.getKHDD();
-			HashMap<Object,Object> KHDDZT = orderMapper.getKHDDZT();
-			List<HashMap<Object,Object>> ysddList = orderMapper.getYSDDSJList();
+			List<HashMap<Object,Object>> KHQSDList = orderMapper.getKHQSDList(param);
+			HashMap<Object,Object> KHDD = orderMapper.getKHDD(param);
+			HashMap<Object,Object> KHDDZT = orderMapper.getKHDDZT(param);
+			List<HashMap<Object,Object>> ysddList = orderMapper.getYSDDSJList(param);
 			HashMap<Object,Object> YDSJZT = ysddList.size()==0?null:ysddList.get(0);
-			HashMap<Object,Object> YDZT = orderMapper.getYDZT();
-			List<HashMap<Object,Object>> DDGZList = orderMapper.getDDGZList();
+			HashMap<Object,Object> YDZT = orderMapper.getYDZT(param);
+			List<HashMap<Object,Object>> DDGZList = orderMapper.getDDGZList(param);
 			resultMap.put("KHQSDList", KHQSDList);
 			resultMap.put("KHDD", KHDD);
 			resultMap.put("KHDDZT", KHDDZT);
