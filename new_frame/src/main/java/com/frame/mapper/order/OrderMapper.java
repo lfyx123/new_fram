@@ -77,6 +77,7 @@ public class OrderMapper extends DaoSupport{
 			DDGZList = this.getListBySQL("getDDGZList", param);
 		}catch(Exception e)
 		{
+			e.printStackTrace();
 			throw new BusinessException(CommonEnum.BusinessException.ERROR_SYSTEM);
 		}
 		return DDGZList; 

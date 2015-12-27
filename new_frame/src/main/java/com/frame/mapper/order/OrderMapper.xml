@@ -36,7 +36,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                                 length(ddsheng.f_dzmc) + 1,
                                 length(ddshi.f_dzmc)) ||
        substr(ddqu.f_dzmc, length(ddshi.f_dzmc) + 1, length(ddqu.f_dzmc)) wllx,
-       khdd.f_kfzyd kfzyd
+       khdd.f_kfzyd kfzyd,
+       ysfs.f_nr f_ysfs,
+       khddmx.f_pch
 	  from tf_khdd khdd
 	  left join tm_csb yslx
 	    on (khdd.f_yslx = yslx.f_qf and yslx.f_bh = 'YSLX')
@@ -56,6 +58,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    on (khdd.f_shi = ddshi.f_dzbh)
 	  left join tm_dzxx ddqu
 	    on (khdd.f_qu = ddqu.f_dzbh)
+      left join tm_csb ysfs 
+	    on (ysfs.f_bh='YSFS' and ysfs.f_qf = khdd.f_ysfs) 
+	  left join (select WM_CONCAT(F_PCH) f_pch, F_KHDDXTBH
+	               from tf_khddmx
+	              group by f_khddxtbh) khddmx
+	    on (khddmx.f_khddxtbh = khdd.f_khddxtbh)
 	 <where>
 	   1=1
 	   <if test="F_XMLXBH !=null and F_XMLXBH!=''">
@@ -77,7 +85,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 得到客户订单状态 -->
 	<select id="getKHDDZT" parameterType="java.util.HashMap"
 		resultType="java.util.HashMap">
-	SELECT CSB.F_NR AS KHDDZT
+	SELECT CSB.F_NR AS KHDDZT,KHDD.F_DDZT
 	  FROM TF_KHDD KHDD, TM_CSB CSB
 	 WHERE F_KHDDXTBH = (SELECT F_KHDDXTBH
 	                       FROM TF_KHDD khdd
@@ -128,7 +136,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 <!-- 运单状态 -->
 	 <select id="getYDZT" parameterType="java.util.HashMap"
 		resultType="java.util.HashMap">
-	 SELECT CSB.F_NR AS YDZT
+	 SELECT CSB.F_NR AS YDZT,YSDMX.F_YSDMXZT
 	  FROM TF_YSDMX YSDMX, TM_CSB CSB
 	 WHERE F_KHDDXTBH = (SELECT F_KHDDXTBH
 	                       FROM TF_KHDD khdd
@@ -153,7 +161,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   
 	  <select id="getDDGZList" parameterType="java.util.HashMap"
 		resultType="java.util.HashMap"> 
-	  select to_date(F_LRSJ,'YYYY-MM-DD') F_LRSJ, nvl(F_BZ,'') F_BZ, F_ZT, nvl(USR.NAME,'') NAME, nvl(ZYD.CPH,'') CPH
+	  select to_char(F_LRSJ,'YYYY-MM-DD') F_LRSJ, nvl(F_BZ,'无') F_BZ, F_ZT, nvl(USR.NAME,'') NAME, nvl(ZYD.CPH,'无') CPH
 	  from tf_ysddsj YSDDSJ
 	  LEFT JOIN KB_USR USR
 	    ON (YSDDSJ.CREATEUSR = USR.ID)
@@ -161,7 +169,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	               FROM TF_ZYD
 	              GROUP BY F_YSDH) ZYD
 	    ON (YSDDSJ.F_YSDH = ZYD.F_YSDH)
-	 where f_khddxtbh = (SELECT F_KHDDXTBH
+	 where f_khddxtbh in (SELECT F_KHDDXTBH
 	                       FROM TF_KHDD khdd
 	                       <where>
 	                       		1=1
