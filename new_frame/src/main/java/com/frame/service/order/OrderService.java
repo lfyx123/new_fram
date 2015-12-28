@@ -31,22 +31,22 @@ public class OrderService {
 			List<HashMap<Object,Object>> DDGZList = orderMapper.getDDGZList(param);
 			//状态判定
 			int GZZT = -1;
-			if(Integer.parseInt(YDZT.get("F_YSDMXZT")==null?"0":YDZT.get("F_YSDMXZT").toString())>=Constants.YDZT_WC)
+			if(YDZT!=null&&Integer.parseInt(YDZT.get("F_YSDMXZT")==null?"0":YDZT.get("F_YSDMXZT").toString())>=Constants.YDZT_WC)
 			{
 				GZZT = Constants.DDGZZT_WC;
-			}else if(YDSJZT.get("YSDDSJZT").equals(Constants.YDSJZT_DD))
+			}else if(YDSJZT!=null&&YDSJZT.get("YSDDSJZT").equals(Constants.YDSJZT_DD))
 			{
 				GZZT = Constants.DDGZZT_DD;
-			}else if(YDSJZT.get("YSDDSJZT").equals(Constants.YDSJZT_QY))
+			}else if(YDSJZT!=null&&YDSJZT.get("YSDDSJZT").equals(Constants.YDSJZT_QY))
 			{
 				GZZT = Constants.DDGZZT_QY;
-			}else if(YDSJZT.get("YSDDSJZT").equals(Constants.YDSJZT_PC))
+			}else if(YDSJZT!=null&&YDSJZT.get("YSDDSJZT").equals(Constants.YDSJZT_PC))
 			{
 				GZZT = Constants.DDGZZT_PC;
-			}else if(KHDDZT.get("F_DDZT").equals(Constants.KHDDZT_JS))
+			}else if(KHDDZT!=null&&Integer.parseInt(KHDDZT.get("F_DDZT")==null?"0":KHDDZT.get("F_DDZT").toString())>=Constants.KHDDZT_JS)
 			{
 				GZZT = Constants.KHDDZT_JS;
-			}else if(KHDDZT.get("F_DDZT").equals(Constants.KHDDZT_ZC))
+			}else if(KHDDZT!=null&&Integer.parseInt(KHDDZT.get("F_DDZT")==null?"0":KHDDZT.get("F_DDZT").toString())>=Constants.KHDDZT_ZC)
 			{
 				GZZT = Constants.KHDDZT_ZC;
 			}
