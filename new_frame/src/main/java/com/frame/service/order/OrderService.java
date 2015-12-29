@@ -23,6 +23,10 @@ public class OrderService {
 		try
 		{
 			List<HashMap<Object,Object>> KHQSDList = orderMapper.getKHQSDList(param);
+			if(KHQSDList.size()>0&&KHQSDList.get(0)!=null)
+			{
+				param.put("F_KHQSD", (KHQSDList.get(0)).get("F_KHQSD"));
+			}
 			HashMap<Object,Object> KHDD = orderMapper.getKHDD(param);
 			HashMap<Object,Object> KHDDZT = orderMapper.getKHDDZT(param);
 			List<HashMap<Object,Object>> ysddList = orderMapper.getYSDDSJList(param);

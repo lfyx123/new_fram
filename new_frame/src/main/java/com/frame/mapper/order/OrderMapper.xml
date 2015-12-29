@@ -9,12 +9,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	SELECT F_KHQSD
 	  FROM TF_KHDD
 	 WHERE F_XMLXBH = #{F_XMLXBH}
+	 <if test="F_KFZYD!=null and F_KFZYD!=''">
 	   AND F_KFZYD = #{F_KFZYD}
+	 </if>
 	<if test="F_KHQSD!=null and F_KHQSD!=''">
 	   AND F_KHQSD=#{F_KHQSD}
 	</if>
 	<if test="F_KHDDBH !=null and F_KHDDBH !=''">
 	   AND F_KHDDBH=#{F_KHDDBH}
+	</if>
+	<if test="F_SHLLR !=null and F_SHLLR !=''">
+	   AND F_SHLLR=#{F_SHLLR}
+	</if>
+	<if test="F_SHRLLFS !=null and F_SHRLLFS !=''">
+	   AND F_SHRLLFS=#{F_SHRLLFS}
 	</if>
    </select>
 	
@@ -38,7 +46,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        substr(ddqu.f_dzmc, length(ddshi.f_dzmc) + 1, length(ddqu.f_dzmc)) wllx,
        khdd.f_kfzyd kfzyd,
        ysfs.f_nr f_ysfs,
-       khddmx.f_pch
+       khddmx.f_pch,
+       khdd.f_khddbh,
+       ddzt.f_nr as f_ddzt
 	  from tf_khdd khdd
 	  left join tm_csb yslx
 	    on (khdd.f_yslx = yslx.f_qf and yslx.f_bh = 'YSLX')
@@ -64,6 +74,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	               from tf_khddmx
 	              group by f_khddxtbh) khddmx
 	    on (khddmx.f_khddxtbh = khdd.f_khddxtbh)
+	  left join tm_csb ddzt on(ddzt.f_bh='KHDDZT' and ddzt.f_qf = khdd.f_ddzt)
 	 <where>
 	   1=1
 	   <if test="F_XMLXBH !=null and F_XMLXBH!=''">
@@ -136,7 +147,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 <!-- 运单状态 -->
 	 <select id="getYDZT" parameterType="java.util.HashMap"
 		resultType="java.util.HashMap">
-	 SELECT CSB.F_NR AS YDZT,YSDMX.F_YSDMXZT
+	 SELECT DISTINCT CSB.F_NR AS YDZT,YSDMX.F_YSDMXZT
 	  FROM TF_YSDMX YSDMX, TM_CSB CSB
 	 WHERE F_KHDDXTBH = (SELECT F_KHDDXTBH
 	                       FROM TF_KHDD khdd
@@ -194,11 +205,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultType="java.util.HashMap">
 	 SELECT KHDD.F_XMLXBH,
 	       XMLX.F_XMLXMC,
-	       KHDD.F_KHQSD,
 	       KHDD.F_KFZYD,
+	       KHDD.F_KHDDBH,
 	       substr(KHDD.F_SHLLR, 0, 1) || '***' AS F_SHLLR,
-	       substr(KHDD.F_SHRLLFS, 0, 3) || '****' || substr(KHDD.F_SHRLLFS, -4) AS F_SHRLLFS
+	       substr(KHDD.F_SHRLLFS, 0, 3) || '****' || substr(KHDD.F_SHRLLFS, -4) AS F_SHRLLFS,
+	       F_SHLLR as F_SHLLRval,
+	       F_SHRLLFS as F_SHRLLFSval
 	  FROM TF_KHDD KHDD, TM_XMLX XMLX
-	 WHERE KHDD.F_XMLXBH = XMLX.F_XMLXBH AND F_KHDDBH = #{KHDDBH}
+	 WHERE KHDD.F_XMLXBH = XMLX.F_XMLXBH 
+	 <if test="KHDDBH !=null and KHDDBH!=''">
+	 	AND F_KHDDBH = #{KHDDBH}
+ 	 </if>
+ 	 <if test="KHQSD !=null and KHQSD!=''">
+	 	AND F_KHQSD = #{KHQSD}
+ 	 </if>
+	 GROUP BY 
+	 	KHDD.F_KHDDBH,
+	 	KHDD.F_XMLXBH,
+	    XMLX.F_XMLXMC,
+	    KHDD.F_KFZYD,
+	    KHDD.F_SHLLR,
+	    KHDD.F_SHRLLFS
 	 </select>
 </mapper>
