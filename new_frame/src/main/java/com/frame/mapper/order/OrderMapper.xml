@@ -48,7 +48,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        ysfs.f_nr f_ysfs,
        khddmx.f_pch,
        khdd.f_khddbh,
-       ddzt.f_nr as f_ddzt
+       ddzt.f_nr as f_ddzt,
+       khdd.f_shllr,
+       khdd.f_shrllfs
 	  from tf_khdd khdd
 	  left join tm_csb yslx
 	    on (khdd.f_yslx = yslx.f_qf and yslx.f_bh = 'YSLX')

@@ -24,13 +24,14 @@ public class OrderControl {
 		
 	@RequestMapping(value = "orderfun")
 	public @ResponseBody String testfun(HttpServletRequest request,   
-            HttpServletResponse response,String F_KHDDBH,String F_KFZYD,String F_XMLXBH,String F_SHLLR,String F_SHRLLFS) {
+            HttpServletResponse response,String F_KHDDBH,String F_KFZYD,String F_XMLXBH,String F_SHLLR,String F_SHRLLFS,String F_KHQSD) {
 		HashMap<Object, Object> param = new HashMap<Object, Object>();
 		param.put("F_KHDDBH", F_KHDDBH);
 		param.put("F_KFZYD", F_KFZYD);
 		param.put("F_XMLXBH", F_XMLXBH);
 		param.put("F_SHLLR", F_SHLLR);
 		param.put("F_SHRLLFS", F_SHRLLFS);
+		param.put("F_KHQSD", F_KHQSD);
 		HashMap<Object, Object> resultMap = new HashMap<Object, Object>();
 		String callback = request.getParameter("callback"); 
 		ObjectMapper mapper = new ObjectMapper();  

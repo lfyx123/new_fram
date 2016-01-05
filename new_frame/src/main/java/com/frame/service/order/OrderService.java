@@ -23,7 +23,7 @@ public class OrderService {
 		try
 		{
 			List<HashMap<Object,Object>> KHQSDList = orderMapper.getKHQSDList(param);
-			if(KHQSDList.size()>0&&KHQSDList.get(0)!=null)
+			if(KHQSDList.size()>0&&KHQSDList.get(0)!=null&&(param.get("F_KHQSD")!=null&&!param.get("F_KHQSD").equals("")))
 			{
 				param.put("F_KHQSD", (KHQSDList.get(0)).get("F_KHQSD"));
 			}
@@ -32,6 +32,9 @@ public class OrderService {
 			List<HashMap<Object,Object>> ysddList = orderMapper.getYSDDSJList(param);
 			HashMap<Object,Object> YDSJZT = ysddList.size()==0?null:ysddList.get(0);
 			HashMap<Object,Object> YDZT = orderMapper.getYDZT(param);
+			param.put("F_KHDDBH", KHDD.get("F_KHDDBH"));
+			param.put("F_SHRLLFS", KHDD.get("F_SHRLLFS"));
+			param.put("F_SHLLR", KHDD.get("F_SHLLR"));
 			List<HashMap<Object,Object>> DDGZList = orderMapper.getDDGZList(param);
 			//状态判定
 			int GZZT = -1;
